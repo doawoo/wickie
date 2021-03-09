@@ -8,12 +8,11 @@ defmodule Wickie.DSL.Module do
     end
   end
 
-  defmacro module(_name, do: block) do
-    case block do
-      {:__block__, [], [{:layout, _, layout_ast} | _]} ->
-        IO.inspect(layout_ast)
-      _ ->
-        raise CompileError, description: "A Wickie 'module' block must also contain a 'layout' block"
+  defmacro module(name, do: block) do
+    quote do
+      def __wickie__module do
+        {:wickie_module, [name: unquote(name), layout: unquote(block)]}
+      end
     end
   end
 end

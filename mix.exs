@@ -14,6 +14,7 @@ defmodule Wickie.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {Wickie, []},
       extra_applications: [:logger]
     ]
   end
@@ -21,7 +22,9 @@ defmodule Wickie.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:libgraph, "~> 0.7"}
+      {:libgraph, "~> 0.7"},
+      {:plug_cowboy, "~> 2.0"},
+      {:typed_struct, "~> 0.2.1"}
     ]
   end
 end

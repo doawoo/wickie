@@ -6,6 +6,6 @@ defmodule Wickie.DSL.Store do
   end
 
   defmacro store(options) do
-
+    {:store, options}
   end
 end

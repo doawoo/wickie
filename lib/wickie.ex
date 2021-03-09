@@ -1,18 +1,13 @@
 defmodule Wickie do
-  @moduledoc """
-  Documentation for `Wickie`.
-  """
+  use Application
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    children = [
+      {Plug.Cowboy, scheme: :http, plug: Wickie.Server.Plug, options: [port: 4000]}
+    ]
 
-  ## Examples
+    options = [strategy: :one_for_one, name: Wickie.Supervisor]
 
-      iex> Wickie.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    Supervisor.start_link(children, options)
   end
 end
